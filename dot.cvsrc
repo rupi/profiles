@@ -1,0 +1,5 @@
+log -N
+diff -u -8 -N -p
+rdiff -u
+update -d -P
+checkout -P

@@ -1,0 +1,49 @@
+#################################################################
+#         .alias file
+#################################################################
+#alias pwd           'echo $cwd'
+
+#         other aliases
+
+alias h		history 
+
+alias kinput2	'\kinput2 -ccdef ccdef.kinput2.egg'
+alias nem	nemacs
+
+alias m		'more'
+alias mroe	'more'
+
+alias pdw	'echo $cwd'
+alias la	'ls -aF'
+alias ll	'ls -laF'
+alias ls	'ls -F'
+alias sl	ls
+#alias su	'su -m'
+alias dir	'ls -l'
+alias ho	'hostname'
+alias +		popd
+alias -		pushd
+alias rmb	"rm -f #* *% *~ .*% .*~ %* ,* .*.BAK .*.bak"
+alias rmc	"ll *.core && rm -f *.core"
+alias lpr	"lpr -h"
+
+alias j		'jobs -l'
+alias d		'date'
+alias f		'fetchmail -c'
+alias pa	'ps -aux |grep $user |more'
+
+alias le	'less -m'
+alias so	source
+
+alias nms 'tbl \!* | nroff -ms | more'                  # nroff -ms
+alias nmm 'tbl \!* | nroff -mandoc | more'                  # nroff -ms
+alias tms 'tbl \!* | troff -t -ms >! troff.output &'    # troff -ms
+alias tpr 'tbl \!* | troff -t -ms | lpr -t &'           # troff & print
+alias ppr 'lpr -t \!* &'                                # print troffed
+
+if ( $term == "kterm" || $term == "xterm") then
+	alias precmd 'echo -n ""'
+	alias cwdcmd 'echo -n "]2;${HOST}:$cwd]1;${HOST}"'
+else
+	:
+endif

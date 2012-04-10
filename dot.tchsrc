@@ -1,0 +1,120 @@
+#
+# .tcshrc T.Okazaki
+#
+
+set history=100
+set path=($path \
+	/opt/local/bin /opt/local/sbin \
+	~/bin \
+	/usr/pkg/bin /usr/pkg/sbin \
+	/usr/local/bin /usr/local/sbin \
+	/bin /usr/bin /sbin /usr/sbin )
+
+
+# for ibus-mozc
+setenv XIM ibus
+setenv GTK_IM_MODULE ibus
+setenv QT_IM_MODULE xim
+setenv XMODIFIERS @im=ibus
+setenv XIM_PROGRAM ibus-daemon
+setenv XIM_ARGS "-r --daemonize --xim"
+
+setenv BLOCKSIZE 1k
+setenv GZIP -9N
+setenv ADOBE_LANG JPN
+
+#setenv XMODIFIERS "@im=none"
+
+if ($?prompt) then
+	set filec
+	stty erase ^H
+	stty cs8 -istrip -parenb
+endif
+
+set lcd = ( )  #  add parents of frequently used directories
+set cdpath = (.. ~ ~/X $lcd)
+set fignore = (.o )
+set listlinks
+set mail=/var/mail/$USER
+
+#         set this for all shells
+
+set noclobber
+
+#         aliases for all shells
+
+
+#         skip remaining setup if not an interactive shell
+
+if ($?USER == 0 || $?prompt == 0) exit
+
+#          settings  for interactive shells
+set filec
+unset ignoreeof
+set notify
+#set savehist=40
+#set prompt="% "
+#set prompt="`hostname`{`whoami`}\!: "
+
+set autoexpand
+set autolist=ambiguous
+set noautologout
+unset autologout
+set nobeep
+set rmstar
+#set watch=(any any)
+set listjobs=long
+set pushdtohome
+#set savedirs
+
+# for bind
+bindkey ^W backward-delete-word
+
+#for complete
+complete man      'n/*/c/'
+complete which    'n/*/c/'
+complete dbx      'p/2/(core)/' 'n/*/c/'
+complete alias    'p/1/a/'
+complete set      'p/1/s/'
+#complete finger   'p/1/u/'
+complete cc 'n/*/f:*.[cao]/'
+complete xdvi 'n/*/f:*.dvi/'
+complete dvi2ps 'n/*/f:*.dvi/'
+complete platex 'n/*/f:*.tex/'
+complete cd 'n/*/d/'
+complete find 'n/-fstype/(nfs 4.2)/' 'n/-name/f/' \
+                     'n/-type/(c b d f p l s)/' 'n/-user/u/' 'n/-exec/c/' \
+                     'n/-ok/c/' 'n/-cpio/f/' 'n/-ncpio/f/' 'n/-newer/f/' \
+                     'c/-/(fstype name perm prune type user nouser \
+                           group nogroup size inum atime mtime ctime exec \
+                           ok print ls cpio ncpio newer xdev depth)/' \
+                     'n/*/d/'
+
+complete finger 'c/*@/$hosts/' 'p/1/u/@'
+
+# set environment
+
+setenv LANG ja_JP.UTF-8
+#setenv LANG ja_JP.eucJP
+# for perl
+setenv PERL_BADLANG 0
+#setenv LC_TIME C
+#setenv ESHELL /usr/local/bin/tcsh
+setenv CVSROOT $HOME/cvsroot
+setenv CVS_RSH ssh
+setenv RSYNC_RSH ssh
+
+setenv JLESSCHARSET japanese-euc
+
+setenv PAGER 'less -ms'
+setenv WNNENVRC $HOME/.wnnrc
+
+#setenv XDVIFONTS /usr/local/lib/tex/fonts/pk:/usr/local/lib/tex/fonts/cmfonts
+
+setenv FTP_PASSWORD okazaki@po.ntts.co.jp
+
+#         other aliases
+
+if ( -f ~/.alias ) then
+	source ~/.alias
+endif
